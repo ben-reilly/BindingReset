@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:BindingReset.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:BindingReset.Views;assembly=BindingReset"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BindingReset.Views.HostView">
+
+  <Design.DataContext>
+    <vm:HostViewModel/>
+  </Design.DataContext>
+  
+  <StackPanel Margin="40">
+    <ItemsControl Items="{Binding Rows}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <ListBox Items="{Binding $parent[v:MainWindow].DataContext.ParentOptions}" SelectedItem="{Binding SelectedOption}">
+          <!--<ListBox Items="{Binding DataContext.ParentOptions, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type v:MainWindow}}}" SelectedItem="{Binding SelectedOption}">-->
+          <!--<ListBox Items="{Binding LocalOptions}" SelectedItem="{Binding SelectedOption}">-->
+            <ListBox.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+              </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding}" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </StackPanel>
+</UserControl>
